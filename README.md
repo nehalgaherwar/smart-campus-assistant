@@ -99,6 +99,11 @@ scripts/
   └── 02-enable-rls.sql        # Enable Row Level Security
 ```
 
+
+# preview:-
+<img width="1291" height="762" alt="Screenshot 2026-03-22 173337" src="https://github.com/user-attachments/assets/c0a8a4d0-4af4-4711-be6f-233bd9139097" />
+
+
 ## Key Features Explained
 
 ### Authentication
