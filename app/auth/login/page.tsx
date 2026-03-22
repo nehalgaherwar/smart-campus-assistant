@@ -48,57 +48,101 @@ export default function Page() {
   }
 
   return (
-    <div className="flex min-h-svh w-full items-center justify-center p-6 md:p-10">
-      <div className="w-full max-w-sm">
+    <div className="min-h-svh w-full flex flex-col items-center justify-center p-4 md:p-10 bg-background relative overflow-hidden">
+      {/* Gradient orbs background */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-gradient-to-r from-indigo-500/20 to-purple-500/20 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-gradient-to-r from-cyan-500/20 to-indigo-500/20 rounded-full blur-3xl" />
+      </div>
+
+      <div className="w-full max-w-sm relative z-10 animate-in">
         <div className="flex flex-col gap-6">
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-2xl">Login</CardTitle>
-              <CardDescription>
-                Enter your email below to login to your account
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <form onSubmit={handleLogin}>
-                <div className="flex flex-col gap-6">
-                  <div className="grid gap-2">
-                    <Label htmlFor="email">Email</Label>
-                    <Input
-                      id="email"
-                      type="email"
-                      placeholder="m@example.com"
-                      required
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                    />
-                  </div>
-                  <div className="grid gap-2">
-                    <Label htmlFor="password">Password</Label>
-                    <Input
-                      id="password"
-                      type="password"
-                      required
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                    />
-                  </div>
-                  {error && <p className="text-sm text-red-500">{error}</p>}
-                  <Button type="submit" className="w-full" disabled={isLoading}>
-                    {isLoading ? 'Logging in...' : 'Login'}
-                  </Button>
+          {/* Logo */}
+          <div className="flex justify-center mb-2">
+            <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-indigo-500 to-cyan-400 flex items-center justify-center shadow-lg">
+              <span className="text-white font-bold text-2xl">⚡</span>
+            </div>
+          </div>
+
+          <div className="glass-lg p-8 rounded-2xl border backdrop-blur-xl">
+            <div className="text-center mb-8">
+              <h1 className="text-3xl font-bold bg-gradient-to-r from-indigo-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent mb-2">
+                Welcome Back
+              </h1>
+              <p className="text-muted-foreground text-sm">
+                Access your Smart Campus AI account
+              </p>
+            </div>
+
+            <form onSubmit={handleLogin} className="space-y-6">
+              <div className="space-y-2">
+                <Label htmlFor="email" className="text-foreground font-medium text-sm">
+                  Email Address
+                </Label>
+                <Input
+                  id="email"
+                  type="email"
+                  placeholder="you@university.edu"
+                  required
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="glass-sm bg-input border-border/50 text-foreground placeholder:text-muted-foreground focus:ring-indigo-500 focus:border-indigo-500"
+                />
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="password" className="text-foreground font-medium text-sm">
+                  Password
+                </Label>
+                <Input
+                  id="password"
+                  type="password"
+                  required
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="glass-sm bg-input border-border/50 text-foreground placeholder:text-muted-foreground focus:ring-indigo-500 focus:border-indigo-500"
+                  placeholder="••••••••"
+                />
+              </div>
+
+              {error && (
+                <div className="glass-sm bg-destructive/20 border border-destructive/50 text-destructive text-sm p-3 rounded-lg animate-in">
+                  {error}
                 </div>
-                <div className="mt-4 text-center text-sm">
-                  Don&apos;t have an account?{' '}
-                  <Link
-                    href="/auth/sign-up"
-                    className="underline underline-offset-4"
-                  >
-                    Sign up
-                  </Link>
-                </div>
-              </form>
-            </CardContent>
-          </Card>
+              )}
+
+              <Button
+                type="submit"
+                className="w-full bg-gradient-to-r from-indigo-500 to-cyan-500 hover:opacity-90 text-white font-medium transition-all duration-300 py-2 rounded-lg"
+                disabled={isLoading}
+              >
+                {isLoading ? (
+                  <span className="flex items-center gap-2">
+                    <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                    Signing in...
+                  </span>
+                ) : (
+                  'Sign In'
+                )}
+              </Button>
+            </form>
+
+            <div className="mt-6 text-center">
+              <p className="text-sm text-muted-foreground">
+                Don&apos;t have an account?{' '}
+                <Link
+                  href="/auth/sign-up"
+                  className="text-indigo-400 hover:text-cyan-400 font-medium transition"
+                >
+                  Create one
+                </Link>
+              </p>
+            </div>
+          </div>
+
+          <p className="text-center text-xs text-muted-foreground">
+            Smart Campus AI • Your campus, smarter
+          </p>
         </div>
       </div>
     </div>

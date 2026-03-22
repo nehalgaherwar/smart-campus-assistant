@@ -1,9 +1,9 @@
-import { createServerClient } from '@/lib/supabase/server'
+import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
 import ChatClient from '@/components/chat/chat-client'
 
 export default async function ChatPage() {
-  const supabase = await createServerClient()
+  const supabase = await createClient()
   
   const {
     data: { user },
