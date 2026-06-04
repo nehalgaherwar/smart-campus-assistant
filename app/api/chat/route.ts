@@ -1,4 +1,4 @@
-import { createServerClient } from '@/lib/supabase/server'
+import { createClient } from '@/lib/supabase/server'
 import { streamText, convertToModelMessages } from 'ai'
 import { z } from 'zod'
 import { NextRequest } from 'next/server'
@@ -20,7 +20,7 @@ const messageSchema = z.object({
 
 export async function POST(request: NextRequest) {
   try {
-    const supabase = await createServerClient()
+    const supabase = await createClient()
 
     const {
       data: { user },
